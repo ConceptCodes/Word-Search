@@ -1,5 +1,5 @@
 import numpy as np
-from random import random 
+import random
 
 class Word():
     def __init__(self, word):
@@ -11,23 +11,23 @@ class Word():
 
     def completed(self): self.completed = True
 
+    def __str__(self): return self.word
+
 class Board():
     def __init__(self, word_list):
         self.__size = 10
         self._word_list = []
         self.body = [[0] * self.__size] * self.__size
         for i in word_list:
-            if type(i) is str & len(i) <= self.__size:
+            if bool(type(i) is str) & len(i) <= self.__size:
                 self._word_list.append(Word(i))
-    
-    '__repr__' == '__str__'
     
     def __str__(self):
         print(np.matrix(self.body))
 
     @property
     def _word_list(self):
-        return self.word_list
+        return [str(i) for i in self._word_list]
 
     @property
     def _completed(self,word, points):
@@ -35,13 +35,16 @@ class Board():
 
     def _horizontal_(self,word):
         # choose a random row
-        row = random.randint(0,row)
+        row = random.randint(0,self.__size)
         # place word inside 
+        return (str(word), row)
 
-    def _vertical_(self, world):
+    def _vertical_(self, word):
         # choose a random col
-        col = random.randint(0,col)
+        col = random.randint(0,self.__size)
         # place word 
-        pass
+        return (str(word), col)
 
-
+    def _diagonal_(self, word):
+        line = random.randint(0, self.__size)
+        return (line, str(word))
